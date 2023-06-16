@@ -13,6 +13,7 @@ public class Menu {
 
     public void Menu() {
         Company cp = new Company();
+        CompanyManagement cm = new CompanyManagement();
         int choice = 0;
         label:
         while (true)// vong lap vo han
@@ -37,16 +38,15 @@ public class Menu {
                     cp.displayCustomer();
                     break;
                 case 2:
-                    Menu2();
+                    cm.Menu2();
                     break;
                 case 3:
                     cp.addCustomer();
                     break;
                 case 4:
-
+                    cp.displayNum();
                     break;
                 case 5:
-
                     break label;
                 default:
                     System.out.println("Làm ơn nhập số từ 1-5 nheeee. Iuuuuuu");
@@ -55,39 +55,6 @@ public class Menu {
         }
     }
 
-    public void Menu2() {
-        Company cp = new Company();
-        int choice = 0;
-        label:
-        while (true)// vong lap vo han
-        {
-            System.out.println("===========MENU===========");
-            System.out.println("1. Find by Customer ID");
-            System.out.println("2. Find by Name");
-            System.out.println("3. Exit");
-            System.out.println("===========END===========");
-            System.out.println("Enter your choose");
-            try {
-                choice = Integer.parseInt(sc.nextLine().trim()); //nhan vao string trả ve interger
 
-            } catch (NumberFormatException e) {
-                System.out.println("Sai roi,nhap so tu 1-3 nheeeee");
-                continue;//
-            }
-            switch (choice) {
-                case 1:
-                    cp.displayById();
-                    break;
-                case 2:
-                    cp.displayByName();
-                    break;
-                case 3:
-                    break label;
-                default:
-                    System.out.println("Làm ơn nhập số từ 1-3 nheeee. Iuuuuuu");
-                    break;
-            }
-        }
-    }
 }
 

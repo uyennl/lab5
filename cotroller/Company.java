@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class Company implements GiaoDien {
     static Scanner sc = new Scanner(System.in);
     static ArrayList<Customer> arrCustomer = new ArrayList<>();
-
     public void addCustomer() {
         int id = enterCustomerId();
         String name = enterName();
@@ -56,7 +55,7 @@ public class Company implements GiaoDien {
                 System.out.println("Tên không được để trống");
                 continue;
             }
-            if (!name.matches(".*\\d.*") || name.matches(".*[^a-zA-Z].*")) {
+            if (!name.matches(".*\\d.*") || !name.matches(".*[^a-zA-Z].*")) {
                 return name;
             } else {
                 System.out.println("Tên không hợp lệ!");
@@ -69,12 +68,12 @@ public class Company implements GiaoDien {
         System.out.println("Mời nhập sdt khách hàng!");
         while (true) {
             try {
-                phone = sc.nextLine();
+                phone = sc.nextLine().trim();
             } catch (NoSuchElementException e) {
                 System.out.println("Không được đẻ trống. Mời nhập lại!");
                 continue;
             }
-            if (!phone.matches("/(03|05|07|08|09|01[2|6|8|9|0])+([0-9]{8})\b/")) {
+            if (phone.matches("(84|0[3|5|7|8|9])+([0-9]{8})")) {
                 boolean flag = false;
                 for (Customer cs : arrCustomer) {
                     if (cs.getPhone().equals(phone)) {
@@ -147,6 +146,32 @@ public class Company implements GiaoDien {
                 System.out.println(search);
             }
         }
+
+    }
+    public Customer searchPhone(String num){
+        for(Customer cs : arrCustomer){
+            if(cs.getPhone().startsWith(num)){
+                return cs;
+            }
+
+        }
+        return null;
+    }
+    public void displayNum(){
+        System.out.println("Nhập mã số đt cần tìm(3 chữ số đầu tiên của số điện thoại)");
+        String num = sc.nextLine();
+        int total = 0;
+        Customer search = searchPhone(num);
+        for(Customer cs : arrCustomer){
+            if(search == null){
+                System.out.println("Không tìm thấy khách hàng có số đt bắt đầu bằng "+ num);
+            }
+            else{
+                System.out.println(search);
+                total++;
+            }
+        }
+        System.out.println("-----------Total: "+total+"----------------");
 
     }
 }
